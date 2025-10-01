@@ -1,0 +1,20 @@
+name: "XiaoZhi Assistant"
+description: "AI Assistant điều khiển thiết bị 2 chiều"
+version: "2.0.0"
+slug: "xiaozhi_assistant"
+arch:
+  - aarch64
+  - amd64
+  - armhf
+  - armv7
+startup: application
+boot: auto
+ports:
+  5050/tcp: 5050
+options:
+  ha_token: ""
+schema:
+  ha_token: str
+map:
+  - config:rw
+host_network: true
