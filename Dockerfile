@@ -1,20 +1,16 @@
-ARG BUILD_FROM=ghcr.io/home-assistant/aarch64-base:latest
+# Base image của Home Assistant Add-on
+ARG BUILD_FROM=ghcr.io/hassio-addons/base:14.3.2
 FROM ${BUILD_FROM}
 
-# Install dependencies
-RUN apk add --no-cache \
-    python3 \
-    py3-pip
+# Set working dir
+WORKDIR /app
 
-# Copy requirements and install Python packages
-COPY app/requirements.txt /tmp/
-RUN pip3 install --no-cache-dir -r /tmp/requirements.txt
+# Copy source code vào /app
+COPY app /app/
 
-# Copy application
-COPY app/ /app/
+# Copy script run.sh vào root container
+COPY run /run.sh
+RUN chmod a+x /run.sh
 
-# Copy run script
-COPY run.sh /run.sh
-RUN chmod +x /run.sh
-
-CMD [ "/run.sh" ]
+# Cài dependencies
+RUN pip3 install --no-cache-dir -r /app/requirements.txt
