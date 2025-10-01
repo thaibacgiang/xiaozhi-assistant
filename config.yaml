@@ -11,10 +11,10 @@ startup: application
 boot: auto
 ports:
   5050/tcp: 5050
-options:
-  ha_token: ""
-schema:
-  ha_token: str
+options: {}
+schema: {}
 map:
   - config:rw
 host_network: true
+homeassistant_api: true
+auth_api: true
